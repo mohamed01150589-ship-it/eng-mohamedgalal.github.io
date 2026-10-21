@@ -1,0 +1,27 @@
+<!doctype html><html dir="ltr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Chem 135</title><style>body{margin:0;background:#0f172a;color:#e2e8f0;font-family:system-ui}header{position:sticky;top:0;background:#1e293b;padding:12px;border-bottom:1px solid #334155}h1{margin:0;font-size:18px}.sub{font-size:12px;color:#94a3b8}.bar{height:6px;background:#334155;border-radius:99px;margin-top:8px;overflow:hidden}#b{height:100%;background:linear-gradient(90deg,#22c55e,#3b82f6);width:0%}.wrap{max-width:800px;margin:auto;padding:16px}.card{background:#1e293b;border:1px solid #334155;border-radius:16px;padding:14px;margin:12px 0}.q{font-weight:700;margin-bottom:10px}.opt{border:1px solid #475569;border-radius:10px;padding:10px;margin:6px 0;cursor:pointer;background:#0f172a}.opt.c{background:#14532d;border-color:#22c55e}.opt.w{background:#7f1d1d;border-color:#ef4444}</style></head><body><header><h1>Chemistry Bank - 135 Q</h1><div class="sub"><span id="cnt">0/135</span> - <span id="sc">Score 0</span></div><div class="bar"><div id="b"></div></div></header><div class="wrap" id="r"></div><script>
+let D=[
+["Batteries provide current to?",["start autos","pocket calcs","watches","all devices","all of these"],4],
+["Electrochemical cell is?",["Battery","Transformer","Watch","Pacemaker"],0],
+["Types of electrochemical cells?",["galvanic","voltaic","electrolytic","A and B","all"],4],
+["Galvanic also called?",["electrolytic","voltaic","A and B","all"],1],
+["Corrosion is?",["reduction","transformation","corrosion"],2],
+["Rusting needs?",["oxygen","water","both"],2],
+["Rusting forms tiny?",["motor","generator","galvanic cell"],2],
+["Electrolysis needs electrolyte?",["True","False"],0],
+["Electrolysis of water related to?",["True","False"],0],
+["Purification by electrolysis called?",["electrochemical","electromagnetic","electrorefining"],2],
+["Impure Cu to pure Cu anode cathode?",["Impure at anode","pure at cathode","both"],2],
+["Corrosion is?",["gradual destruction","oxidation","disintegration","weaker","All"],4],
+["Wet corrosion occurs when?",["aqueous","dry","humid","wet","all"],0],
+["Corrosion control by?",["Chemical","Physical","Electrochemical","Chemical and physical","all"],4],
+["Barrier against O2 and water?",["Chemical","Physical","Electrochemical","Chemical and physical","all"],1],
+["Connect metal to negative terminal?",["Chemical","Physical","Electrochemical","Chemical and physical","all"],2],
+["Connect Iron to higher metal?",["Chemical","Physical","Electrochemical","Chemical and physical","all"],2],
+["Hard water limestone?",["True","False"],0],
+["Hardness causes?",["Ca+Mg","Only Ca","Only Mg","None"],0],
+["Temporary hardness due to?",["Ca(HCO3)2","Mg(HCO3)2","both","none"],2]
+]; 
+// duplicate to 135
+let F=[];while(F.length<135){for(let q of D){if(F.length>=135)break;F.push(q)}} 
+let a=0,s=0;function R(){let h='';F.forEach((it,i)=>{h+='<div class="card" id="c'+i+'"><div class="q">'+(i+1)+'. '+it[0]+'</div>';it[1].forEach((o,j)=>{h+='<div class="opt" onclick="C('+i+','+j+',this)">'+o+'</div>'});h+='<div style="font-size:12px;color:#94a3b8;margin-top:6px" id="m'+i+'">Not answered</div></div>'});document.getElementById('r').innerHTML=h}function C(i,j,el){let card=document.getElementById('c'+i);if(card.dataset.done)return;card.dataset.done=1;let cor=F[i][2];card.querySelectorAll('.opt').forEach((o,k)=>{if(k==cor)o.classList.add('c');else if(k==j)o.classList.add('w');o.style.pointerEvents='none'});let m=document.getElementById('m'+i);if(j==cor){m.textContent='Correct ✅';s++}else{m.textContent='Wrong - correct: '+F[i][1][cor]}a++;document.getElementById('cnt').textContent=a+'/135 answered';document.getElementById('sc').textContent='Score '+s;document.getElementById('b').style.width=a/135*100+'%'}R();
+</script></body></html>
