@@ -1,89 +1,136 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Testing Bank - 45Q</title>
 <style>
-body{background:#0f172a;color:#fff;font-family:system-ui;padding:12px;margin:0}
-.header{display:flex;gap:8px;justify-content:center;margin:12px;flex-wrap:wrap;position:sticky;top:10px;z-index:10}
-.badge{background:#1e293b;border:1px solid #334155;border-radius:20px;padding:8px 16px;font-weight:800}
-.card{background:#fff;color:#111;border-radius:18px;padding:18px;margin:14px auto;max-width:700px}
-.q-title{font-size:16px;font-weight:800;margin:12px 0;line-height:1.6}
-.opt{border:1.5px solid #e2e8f0;border-radius:12px;padding:12px;margin:10px 0;cursor:pointer;display:flex;gap:10px;align-items:center}
-.opt:hover{background:#f1f5f9} .correct{background:#dcfce7!important;border-color:#22c55e!important} .wrong{background:#fee2e2!important;border-color:#ef4444!important}
-.num{background:#e2e8f0;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:bold}
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap');
+*{box-sizing:border-box;font-family:'Cairo',system-ui}
+body{margin:0;min-height:100vh;background:#0a1729;display:flex;justify-content:center;padding:14px;color:#fff}
+.wrapper{width:100%;max-width:500px}
+.card-main{background:linear-gradient(180deg,#12304f,#0d2038);border-radius:28px;padding:28px 20px;border:1px solid #1e3a5f;box-shadow:0 20px 60px rgba(0,0,0,.5);text-align:center}
+.laptop{font-size:60px;filter:drop-shadow(0 0 20px rgba(34,211,238,.6))}
+h1{margin:10px 0 4px;font-size:26px;font-weight:800}
+.sub{color:#5ec8e8;font-size:12px;margin:8px 0 18px;line-height:1.7}
+.dev{color:#5a7a9a;font-size:10px;letter-spacing:2px;margin:14px 0 2px}
+.dev-name{color:#22d3ee;font-weight:800;letter-spacing:2px;font-size:15px;margin-bottom:16px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start;margin:12px 0}
+.filt{background:#0f2a4a;border:1px solid #1e3f66;border-radius:20px;padding:7px 12px;font-size:12px;cursor:pointer;color:#a8c0d8}
+.filt.active{border-color:#22d3ee;color:#22d3ee;box-shadow:0 0 10px rgba(34,211,238,.3)}
+.count{color:#6b8aaa;font-size:13px;margin:14px 0}.count b{color:#22d3ee}
+.start-btn{width:100%;background:linear-gradient(90deg,#0e8fb0,#149cc0);border:none;border-radius:16px;padding:15px;font-size:18px;font-weight:800;color:#fff;cursor:pointer;box-shadow:0 8px 24px rgba(14,143,176,.4)}
+#quizView{display:none}
+.topbar{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:10px 0;position:sticky;top:8px;z-index:5}
+.badge{background:#132a46;border:1px solid #1e3f66;border-radius:20px;padding:6px 10px;font-size:11px;font-weight:700}
+.qcard{background:#fff;color:#111;border-radius:18px;padding:14px;margin:10px 0;text-align:left;direction:ltr}
+.qtitle{font-weight:800;font-size:13px;margin:6px 0 10px;line-height:1.5}
+.opt{border:1.5px solid #e2e8f0;border-radius:12px;padding:9px;margin:7px 0;cursor:pointer;display:flex;gap:8px;align-items:center;font-size:12px}
+.opt.correct{background:#dcfce7!important;border-color:#22c55e!important}.opt.wrong{background:#fee2e2!important;border-color:#ef4444!important}
+.letter{background:#e2e8f0;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:11px}
+.back{background:transparent;border:1px solid #2a4a70;color:#7fb8d8;border-radius:12px;padding:6px 12px;cursor:pointer;margin:8px 0}
 </style>
 </head>
 <body>
-<h3 style="text-align:center">Testing Equipment Bank - 45Q</h3>
-<div class="header">
+<div class="wrapper">
+<div id="landing" class="card-main">
+<div class="laptop">💻</div>
+<h1>Testing Equipment Bank</h1>
+<div class="sub">General Test · DMM · Oscilloscope · Patient Simulator · 45 Questions</div>
+<div class="dev">DESIGNED & DEVELOPED BY</div>
+<div class="dev-name">ENG MOHAMED GALAL</div>
+<div style="text-align:right;color:#8fb3d0;font-size:13px;margin-top:12px">اختر الموضوع</div>
+<div class="filters" id="filters"></div>
+<div class="count">عدد الأسئلة: <b id="qcount">45</b> سؤال</div>
+<button class="start-btn" onclick="startQuiz()">ابدأ الاختبار ▶</button>
+<div class="dev" style="margin-top:20px">DESIGNED & DEVELOPED BY</div>
+<div class="dev-name">ENG MOHAMED GALAL</div>
+</div>
+<div id="quizView">
+<button class="back" onclick="showLanding()">← رجوع</button>
+<div class="topbar">
 <div class="badge" id="prog">0/45</div>
 <div class="badge" style="color:#22c55e">✅ <span id="ok">0</span></div>
 <div class="badge" style="color:#ef4444">❌ <span id="bad">0</span></div>
 <div class="badge">📊 <span id="perc">0%</span></div>
 </div>
 <div id="quiz"></div>
+</div>
+</div>
 <script>
-const questions=[
-{q:"1. is the process of verifying that a device is within the manufacturer's specifications for certain measurement capabilities.",options:["Testing","Calibration","General testing","General calibration"],correct:1},
-{q:"2. is not industry specific and is typically used for the measurement, analysis or simulation of a broad range of physical properties or component level troubleshooting.",options:["General Test Equipment","General Basic Equipment","Test equipment","Basic equipment"],correct:0},
-{q:"3. is used to measure, test, analyze, control, calibrate, display and record data in a wide range of mechanical equipment testing situations.",options:["Electrical equipment","mechanical equipment","electronic equipment","a&c"],correct:1},
-{q:"4. is used to create signals and capture responses from electronic devices under test (DUTs).",options:["Electrical equipment","mechanical equipment","electronic equipment","a&c"],correct:2},
-{q:"5. Ohmmeter measure",options:["Resistance","Volt","current","Inductance"],correct:0},
-{q:"6. A multi-meter or a multitester is a",options:["Electrical equipment","mechanical equipment","electronic equipment","a&c"],correct:3},
-{q:"7. Typically for DMMs resolution levels of bits are generally used.",options:["12","18","16","20"],correct:2},
-{q:"8. When in this mode, the DMM sounds when two points are connected to each other.",options:["continuity","resistance","volt","current"],correct:0},
-{q:"9. Is the time required for the instrument to settle after the input has been switched.",options:["settling time","switch time","signal measure time","auto-zero time"],correct:0},
-{q:"10. This is the basic time required to make the measurement itself.",options:["settling time","switch time","signal measure time","auto-zero time"],correct:2},
-{q:"11. Once the value to be measured has been applied to the input, a certain time will be required for it to settle.",options:["settling time","switch time","signal measure time","auto-zero time"],correct:0},
-{q:"12. When auto-range is selected, or range changes are made, it is necessary to zero the meter to ensure accuracy.",options:["settling time","switch time","signal measure time","auto-zero time"],correct:3},
-{q:"13. In some DMMs a calibration is periodically performed. This must be accounted for, especially where measurements are taken under automatic or computer control.",options:["settling time","switch time","ADC calibration time","auto-zero time"],correct:2},
-{q:"14. Stands for alternating current (AC) in multi-meter symbols.",options:["c&d","squiggly line","solid line","dashed line"],correct:1},
-{q:"15. You use these settings when you are measuring a circuit with direct current in multi-meter symbols.",options:["c&d","squiggly line","solid line","dashed line"],correct:0},
-{q:"16. A type of electronic test instrument that allows the observation of the change of an electrical signal over time, such that voltage and time describe a shape which is continuously graphed against a calibrated scale.",options:["ECG","DMM","oscilloscope","DVOM"],correct:2},
-{q:"17. This is the attenuation or amplification of the signal. Use the volts/div control to adjust the amplitude of the signal to the desired measurement range.",options:["Graticule","vertical","horizontal","trigger"],correct:1},
-{q:"18. This is the time base. Use the sec/div control to set the amount of time per division represented",options:["Graticule","vertical","horizontal","trigger"],correct:2},
-{q:"19. Used to stabilize a repeated signal or single event.",options:["Graticule","vertical","horizontal","trigger"],correct:3},
-{q:"20. A network of lines representing meridians and parallels, on which a map or plan can be represented, on the screen of an oscilloscope, used as a measuring scale or an aid in locating objects.",options:["Graticule","vertical","horizontal","trigger"],correct:0},
-{q:"21. is the modeling of the human physiology such as vital signs, clinical signs and symptoms.",options:["ECG","patient","patient simulator","Spo2"],correct:2},
-{q:"22. Function of ECG",options:["Control heart signals","show heart signals","silence heart signals","create heart signals"],correct:3},
-{q:"23. All simulations are grouped into related wave groups.",options:["Arrhythmias simulation","Pacemaker","Normal Sinus Rhythm simulation","a&c"],correct:3},
-{q:"24. can adjust the amplitude of all TV Paced waveforms",options:["Arrhythmias simulation","Pacemaker","Normal Sinus Rhythm simulation","a&c"],correct:3},
-{q:"25. Cardiac output measurement devices that use different techniques are",options:["Fick dye injection","Doppler ultrasonography","Bio-impedance","a,b&C"],correct:3},
-{q:"26. Before you do a pressure leak test on a monitor, do the pressure leak test",options:["without monitor","with monitor","with the nurse","a&c"],correct:0},
-{q:"27. When you put the oximeter sensor on the artificial finger, make sure the red LEDs are the bottom.",options:["off","in","at","on"],correct:3},
-{q:"28. You can the degree of oxygen saturation in Spo2 parameters",options:["raise only","lower only","raise or lower","no answer"],correct:2},
-{q:"29. You can test SpO2 under light",options:["white","red","yellow","any"],correct:3},
-{q:"30. Some simulators test Massimo Rainbow SpO2.",options:["can't","can","always","no correct answer"],correct:1},
-{q:"31. The manufacturer must be known before you do a pulse oximeter test, optically through an",options:["real leg","real finger","artificial finger","artificial leg"],correct:2},
-{q:"32. Oximeter Limits Test",options:["Oxygen Limits Test","Pulse Rate Test","Pulse Amplitude Test","a,b&C"],correct:3},
-{q:"33. Are a series of steps that change the output of the simulator automatically.",options:["Oxygen Limits Test","Pulse Rate Test","Pulse Amplitude Test","Autosequences"],correct:3},
-{q:"34. If the tester is not to be used for more than a month,",options:["remove it from charger","keep it in charger","get new charger","call for new tester"],correct:0},
-{q:"35. is a breakthrough measurement that allows clinicians to noninvasively and continuously monitor levels of methemoglobin in the blood",options:["SpHb","SpMet","SpCO","Leak Test"],correct:1},
-{q:"True or False: Frequency is in henry",options:["True","False"],correct:1},
-{q:"True or False: DUT is device under calibration",options:["True","False"],correct:1},
-{q:"True or False: Digital multi-meters are now far more common due to their cost and precision",options:["True","False"],correct:0},
-{q:"True or False: Time is displayed on oscilloscope from right to left vertically",options:["True","False"],correct:1},
-{q:"True or False: Volt appears on oscilloscope horizontally",options:["True","False"],correct:1},
-{q:"True or False: Replace the batteries when the high battery indicator shows to prevent incorrect measurements",options:["True","False"],correct:1},
-{q:"True or False: Use the Product around explosive gas, vapor, or in damp or wet environments",options:["True","False"],correct:1},
-{q:"True or False: The pulse oximeter component of the device is not intended to validate the SpO2 accuracy of pulse oximeter equipment.",options:["True","False"],correct:0},
-{q:"True or False: You can put fluid onto the Product surface. Fluid seepage into the electrical circuitry may cause the tester to fail.",options:["True","False"],correct:1},
-{q:"True or False: Pressure Gauge: This test causes the system to rise to the Set point pressure, which was defined when the auto sequence was edited.",options:["True","False"],correct:1}
+const allQuestions=[
+{q:"1. is the process of verifying that a device is within the manufacturer's specifications.",options:["Testing","Calibration","General testing","General calibration"],correct:1,cat:"General"},
+{q:"2. is not industry specific and is typically used for measurement.",options:["General Test Equipment","General Basic Equipment","Test equipment","Basic equipment"],correct:0,cat:"General"},
+{q:"3. is used to measure, test, analyze, control, calibrate, display and record data in mechanical testing.",options:["Electrical equipment","mechanical equipment","electronic equipment","a&c"],correct:1,cat:"General"},
+{q:"4. is used to create signals and capture responses from electronic devices under test (DUTs).",options:["Electrical equipment","mechanical equipment","electronic equipment","a&c"],correct:2,cat:"General"},
+{q:"5. Ohmmeter measure",options:["Resistance","Volt","current","Inductance"],correct:0,cat:"DMM"},
+{q:"6. A multi-meter or a multitester is a",options:["Electrical equipment","mechanical equipment","electronic equipment","a&c"],correct:3,cat:"DMM"},
+{q:"7. Typically for DMMs resolution levels of bits are generally used.",options:["12","18","16","20"],correct:2,cat:"DMM"},
+{q:"8. When in this mode, the DMM sounds when two points are connected.",options:["continuity","resistance","volt","current"],correct:0,cat:"DMM"},
+{q:"9. Is the time required for the instrument to settle after the input has been switched.",options:["settling time","switch time","signal measure time","auto-zero time"],correct:0,cat:"DMM"},
+{q:"10. This is the basic time required to make the measurement itself.",options:["settling time","switch time","signal measure time","auto-zero time"],correct:2,cat:"DMM"},
+{q:"11. Once the value to be measured has been applied, a certain time will be required.",options:["settling time","switch time","signal measure time","auto-zero time"],correct:0,cat:"DMM"},
+{q:"12. When auto-range is selected, it is necessary to zero the meter.",options:["settling time","switch time","signal measure time","auto-zero time"],correct:3,cat:"DMM"},
+{q:"13. In some DMMs a calibration is periodically performed.",options:["settling time","switch time","ADC calibration time","auto-zero time"],correct:2,cat:"DMM"},
+{q:"14. Stands for alternating current (AC) in multi-meter symbols.",options:["c&d","squiggly line","solid line","dashed line"],correct:1,cat:"DMM"},
+{q:"15. You use these settings when you are measuring a circuit with direct current.",options:["c&d","squiggly line","solid line","dashed line"],correct:0,cat:"DMM"},
+{q:"16. A type of electronic test instrument that allows observation of signal change over time",options:["ECG","DMM","oscilloscope","DVOM"],correct:2,cat:"Oscilloscope"},
+{q:"17. This is the attenuation or amplification of the signal. Use the volts/div control",options:["Graticule","vertical","horizontal","trigger"],correct:1,cat:"Oscilloscope"},
+{q:"18. This is the time base. Use the sec/div control",options:["Graticule","vertical","horizontal","trigger"],correct:2,cat:"Oscilloscope"},
+{q:"19. Used to stabilize a repeated signal or single event.",options:["Graticule","vertical","horizontal","trigger"],correct:3,cat:"Oscilloscope"},
+{q:"20. A network of lines representing meridians and parallels on oscilloscope screen",options:["Graticule","vertical","horizontal","trigger"],correct:0,cat:"Oscilloscope"},
+{q:"21. is the modeling of the human physiology such as vital signs",options:["ECG","patient","patient simulator","Spo2"],correct:2,cat:"Patient"},
+{q:"22. Function of ECG",options:["Control heart signals","show heart signals","silence heart signals","create heart signals"],correct:3,cat:"Patient"},
+{q:"23. All simulations are grouped into related wave groups.",options:["Arrhythmias simulation","Pacemaker","Normal Sinus Rhythm simulation","a&c"],correct:3,cat:"Patient"},
+{q:"24. can adjust the amplitude of all TV Paced waveforms",options:["Arrhythmias simulation","Pacemaker","Normal Sinus Rhythm simulation","a&c"],correct:3,cat:"Patient"},
+{q:"25. Cardiac output measurement devices that use different techniques are",options:["Fick dye injection","Doppler ultrasonography","Bio-impedance","a,b&C"],correct:3,cat:"Patient"},
+{q:"26. Before you do a pressure leak test on a monitor, do the pressure leak test",options:["without monitor","with monitor","with the nurse","a&c"],correct:0,cat:"Patient"},
+{q:"27. When you put the oximeter sensor on the artificial finger, make sure the red LEDs are the bottom.",options:["off","in","at","on"],correct:3,cat:"Patient"},
+{q:"28. You can the degree of oxygen saturation in Spo2 parameters",options:["raise only","lower only","raise or lower","no answer"],correct:2,cat:"Patient"},
+{q:"29. You can test SpO2 under light",options:["white","red","yellow","any"],correct:3,cat:"Patient"},
+{q:"30. Some simulators test Massimo Rainbow SpO2.",options:["can't","can","always","no correct answer"],correct:1,cat:"Patient"},
+{q:"31. The manufacturer must be known before you do a pulse oximeter test, optically through an",options:["real leg","real finger","artificial finger","artificial leg"],correct:2,cat:"Patient"},
+{q:"32. Oximeter Limits Test",options:["Oxygen Limits Test","Pulse Rate Test","Pulse Amplitude Test","a,b&C"],correct:3,cat:"Patient"},
+{q:"33. Are a series of steps that change the output of the simulator automatically.",options:["Oxygen Limits Test","Pulse Rate Test","Pulse Amplitude Test","Autosequences"],correct:3,cat:"Patient"},
+{q:"34. If the tester is not to be used for more than a month,",options:["remove it from charger","keep it in charger","get new charger","call for new tester"],correct:0,cat:"Patient"},
+{q:"35. is a breakthrough measurement that allows clinicians to noninvasively monitor methemoglobin",options:["SpHb","SpMet","SpCO","Leak Test"],correct:1,cat:"Patient"},
+{q:"36. Frequency is in henry",options:["True","False"],correct:1,cat:"TrueFalse"},
+{q:"37. DUT is device under calibration",options:["True","False"],correct:1,cat:"TrueFalse"},
+{q:"38. Digital multi-meters are now far more common due to their cost and precision",options:["True","False"],correct:0,cat:"TrueFalse"},
+{q:"39. Time is displayed on oscilloscope from right to left vertically",options:["True","False"],correct:1,cat:"TrueFalse"},
+{q:"40. Volt appears on oscilloscope horizontally",options:["True","False"],correct:1,cat:"TrueFalse"},
+{q:"41. Replace the batteries when the high battery indicator shows",options:["True","False"],correct:1,cat:"TrueFalse"},
+{q:"42. Use the Product around explosive gas, vapor, or in damp or wet environments",options:["True","False"],correct:1,cat:"TrueFalse"},
+{q:"43. The pulse oximeter component is not intended to validate SpO2 accuracy",options:["True","False"],correct:0,cat:"TrueFalse"},
+{q:"44. You can put fluid onto the Product surface. Fluid seepage may cause failure.",options:["True","False"],correct:1,cat:"TrueFalse"},
+{q:"45. Pressure Gauge causes the system to rise to the Set point pressure",options:["True","False"],correct:1,cat:"TrueFalse"},
 ];
-let ok=0,bad=0;let answered=new Set();
-function render(){
-document.getElementById('prog').innerText=answered.size+'/'+questions.length;
-document.getElementById('ok').innerText=ok;
-document.getElementById('bad').innerText=bad;
-document.getElementById('perc').innerText=Math.round((ok/questions.length)*100||0)+'%';
+const cats=[
+{id:'all',name:'الكل',count:45},
+{id:'General',name:'General',count:4},
+{id:'DMM',name:'DMM',count:11},
+{id:'Oscilloscope',name:'Oscillo',count:5},
+{id:'Patient',name:'Patient',count:15},
+{id:'TrueFalse',name:'True/False',count:10}
+];
+let activeCat='all';let filtered=allQuestions;let ok=0,bad=0,answered=new Set();
+function renderFilters(){
+let h='';cats.forEach(c=>{
+let cnt=c.id==='all'?allQuestions.length:c.count;
+let label=c.id==='all'?'📚 الكل ('+cnt+')':c.name+' ('+cnt+')';
+let cls=activeCat===c.id?'filt active':'filt';
+h+='<div class="'+cls+'" onclick="setCat(\''+c.id+'\')">'+label+'</div>';
+});
+document.getElementById('filters').innerHTML=h;
+document.getElementById('qcount').innerText=filtered.length;
 }
-function build(){
-let h='';questions.forEach((qq,i)=>{h+=`<div class="card"><div class="q-title">${qq.q}</div>`;qq.options.forEach((op,j)=>{h+=`<div class="opt" id="q${i}o${j}" onclick="check(${i},${j})"><div class="num">${String.fromCharCode(65+j)}</div> ${op}</div>`;});h+=`</div>`;});document.getElementById('quiz').innerHTML=h;
-}
-function check(qi,oi){if(answered.has(qi)) return;answered.add(qi);let q=questions[qi];let el=document.getElementById(`q${qi}o${oi}`);if(oi===q.correct){el.classList.add('correct'); ok++}else{el.classList.add('wrong'); document.getElementById(`q${qi}o${q.correct}`).classList.add('correct'); bad++}render();}
-build();render();
+function setCat(id){activeCat=id;if(id==='all')filtered=allQuestions;else filtered=allQuestions.filter(q=>q.cat===id);renderFilters();}
+function showLanding(){document.getElementById('landing').style.display='block';document.getElementById('quizView').style.display='none'}
+function startQuiz(){ok=0;bad=0;answered=new Set();document.getElementById('landing').style.display='none';document.getElementById('quizView').style.display='block';build();renderProg();window.scrollTo(0,0);}
+function renderProg(){document.getElementById('prog').innerText=answered.size+'/'+filtered.length;document.getElementById('ok').innerText=ok;document.getElementById('bad').innerText=bad;document.getElementById('perc').innerText=Math.round((ok/filtered.length)*100||0)+'%';}
+function build(){let h='';filtered.forEach((qq,i)=>{h+='<div class="qcard"><div class="qtitle">'+qq.q+'</div>';qq.options.forEach((op,j)=>{h+='<div class="opt" id="q'+i+'o'+j+'" onclick="check('+i+','+j+')"><div class="letter">'+String.fromCharCode(65+j)+'</div> '+op+'</div>';});h+='</div>';});document.getElementById('quiz').innerHTML=h;}
+function check(qi,oi){if(answered.has(qi))return;answered.add(qi);let q=filtered[qi];let el=document.getElementById('q'+qi+'o'+oi);if(oi===q.correct){el.classList.add('correct');ok++}else{el.classList.add('wrong');document.getElementById('q'+qi+'o'+q.correct).classList.add('correct');bad++}renderProg();}
+renderFilters();
 </script>
 </body>
-</html>
+  </html>
