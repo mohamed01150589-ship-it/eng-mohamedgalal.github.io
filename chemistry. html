@@ -1,0 +1,33 @@
+<!DOCTYPE html><html dir=rtl><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>كيمياء</title><style>body{background:#0f172a;color:#e2e8f0;font-family:sans-serif;padding:10px}.c{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:12px;margin:10px 0}.o{border:1px solid #334155;padding:8px;border-radius:8px;margin:5px 0;cursor:pointer}.ok{background:#052e16;border-color:#22c55e}.bad{background:#450a0a;border-color:#ef4444}.b{padding:10px;background:#38bdf8;color:#000;border:0;border-radius:10px;width:100%;font-weight:700}</style><div id=a></div><script>
+q=[
+{q:"Batteries provide current to?",o:["start autos","pocket calcs","watches","all devices","all of these"],a:4},
+{q:"Electrochemical cell is?",o:["Battery","Transformer","Watch","Pacemaker"],a:0},
+{q:"Types of electrochemical cells?",o:["galvanic","voltaic","electrolytic","A and B","all"],a:4},
+{q:"Galvanic also called?",o:["electrolytic","voltaic","A and B","all"],a:1},
+{q:"Corrosion is?",o:["reduction","transformation","corrosion"],a:2},
+{q:"Rusting needs?",o:["oxygen","water","both"],a:2},
+{q:"Rusting forms tiny?",o:["motor","generator","galvanic cell"],a:2},
+{q:"Electrolysis needs electrolyte?",o:["True","False"],a:0},
+{q:"Electrolysis of water related to?",o:["Lead battery","NiCd","Lithium","Electrolysis of water"],a:3},
+{q:"Purification by electrolysis called?",o:["electrochemical","electromagnetic","electrorefining"],a:2},
+{q:"Impure Cu to pure Cu anode cathode?",o:["anode cathode","cathode anode","none"],a:0},
+{q:"Corrosion is?",o:["gradual destruction","oxidation","disintegration","weaker","All"],a:4},
+{q:"Wet corrosion occurs when?",o:["aqueous solution","humidity>66%","salts","all"],a:3},
+{q:"Corrosion control by?",o:["Chemical","Physical","all"],a:2},
+{q:"Barrier against O2 and water?",o:["Chemical","Physical","all"],a:1},
+{q:"Connect metal to negative terminal?",o:["Cathodic","Sacrificial","Galvanising","all"],a:0},
+{q:"Connect Iron to higher metal?",o:["Cathodic","Sacrificial","Galvanising","all"],a:1},
+{q:"Coating with Zinc?",o:["Cathodic","Sacrificial","Galvanising","all"],a:2},
+{q:"Lubrication control friction?",o:["True","False"],a:0},
+{q:"Hard water formed limestone?",o:["True","False"],a:0},
+{q:"Type water hardness?",o:["Temporary","Permanent","All"],a:2},
+{q:"Purification definitions?",o:["dirty to clean","freeing impurity","removing contaminants","All"],a:3},
+{q:"Filtration methods?",o:["Microporous","Ultrafiltration","Carbon","All"],a:3},
+{q:"pH 1 called?",o:["highly acidic","neutral","highly alkaline","none"],a:0},
+{q:"pH 7 called?",o:["highly acidic","neutral","highly alkaline","none"],a:1},
+{q:"pH 14 called?",o:["highly acidic","neutral","highly alkaline","none"],a:2},
+{q:"Lemon is?",o:["acids","neutral","bases","none"],a:0}
+];
+let h='';q.forEach((x,i)=>{h+='<div class=c><b>'+(i+1)+'. '+x.q+'</b>';x.o.forEach((o,j)=>{h+='<div class=o id=b'+i+j+' onclick="c('+i+','+j+')">'+o+'</div>';});h+='</div>';});document.getElementById('a').innerHTML=h;
+function c(i,j){if(document.getElementById('b'+i+j).classList.contains('ok')||document.getElementById('b'+i+j).classList.contains('bad'))return;let correct=q[i].a;let el=document.getElementById('b'+i+j);if(j==correct){el.classList.add('ok')}else{el.classList.add('bad');document.getElementById('b'+i+correct).classList.add('ok');}}
+</script>
