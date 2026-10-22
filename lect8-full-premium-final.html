@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lect8 Electrical - Full 139Q - Premium Final Result</title>
+<style>
+*{box-sizing:border-box;font-family:system-ui}
+body{margin:0;min-height:100vh;background:radial-gradient(1200px 600px at 50% -10%,#12344e 0%,#0a1f33 55%,#07182a 100%);color:#fff;padding:12px}
+.wrapper{max-width:560px;margin:0 auto}
+.card-main{background:linear-gradient(180deg,#12304f,#0d2038);border-radius:28px;padding:26px 18px;border:1px solid #1e3a5f;text-align:center}
+.laptop{font-size:60px}
+h1{font-size:22px}
+.sub{color:#22d3ee;font-size:11px}
+.dev{color:#5a7a9a;font-size:10px;letter-spacing:2px;margin:14px 0 2px}
+.dev-name{color:#22d3ee;font-weight:800}
+.filt{display:inline-flex;padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);margin:4px 3px;font-size:11px;cursor:pointer}
+.filt.active{background:rgba(34,211,238,.18);border-color:#22d3ee;color:#fff}
+.count{color:#64748b;margin:12px 0;font-size:13px}.count b{color:#22d3ee}
+.start-btn{width:100%;padding:15px;border:0;border-radius:16px;background:linear-gradient(90deg,#0e8fa8,#14b8d6);color:#fff;font-weight:800;font-size:17px;cursor:pointer}
+.topbar{position:sticky;top:0;z-index:9;background:#0a1f33;padding:10px 8px;display:flex;gap:6px;overflow:auto}
+.badge{padding:6px 10px;border-radius:999px;font-size:11px;border:1px solid rgba(255,255,255,.15);background:#1e293b}
+.badge.ok{background:#0f3a2e;color:#86efac;border-color:#22c55e}
+.badge.bad{background:#3a1a1a;color:#fca5a5;border-color:#ef4444}
+.badge.per{background:#3a2e0f;color:#fde68a;border-color:#eab308}
+.progress{height:8px;background:rgba(255,255,255,.12);border-radius:999px;margin:8px;overflow:hidden}
+.progress div{height:100%;background:linear-gradient(90deg,#22d3ee,#0ea5e9);width:0%}
+.qcard{background:#fff;border-radius:20px;padding:14px;margin:12px 6px;color:#0f172a}
+.qhead{display:flex;gap:8px;align-items:center}
+.qnum{background:#0e7490;color:#fff;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:13px}
+.qtag{background:#0e7490;color:#fff;padding:4px 10px;border-radius:999px;font-size:11px}
+.qtitle{font-weight:800;font-size:14px;margin:10px 0;text-align:left;direction:ltr}
+.opt{border:1.5px solid #e2e8f0;border-radius:12px;padding:11px 12px;display:flex;gap:10px;margin:7px 0;cursor:pointer;background:#fff;text-align:left;direction:ltr}
+.opt .L{width:30px;height:30px;border-radius:50%;background:#f1f5f9;border:1px solid #cbd5e1;display:grid;place-items:center;font-weight:700}
+.opt.correct{border-color:#22c55e;background:#f0fdf4}.opt.correct .L{background:#22c55e;color:#fff}
+.opt.wrong{border-color:#ef4444;background:#fef2f2}.opt.wrong .L{background:#ef4444;color:#fff}
+.explain{margin-top:10px;background:#ecfdf5;border-right:4px solid #22c55e;border-radius:10px;padding:9px 11px;color:#065f46;font-size:12px;text-align:right;direction:rtl}
+.resultCard{background:#fff;border-radius:26px;padding:20px;text-align:center;color:#0f172a;margin:10px 6px}
+.circle{width:160px;height:160px;border-radius:50%;margin:12px auto;background:conic-gradient(#06b6d4 var(--p),#e2e8f0 0);display:grid;place-items:center}
+.circle>div{width:128px;height:128px;background:#fff;border-radius:50%;display:grid;place-items:center}
+.boxes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:14px 0}.box{border-radius:16px;padding:14px 8px;border:2px solid}
+.box.g{border-color:#22c55e;background:#f0fdf4;color:#15803d}.box.r{border-color:#ef4444;background:#fef2f2;color:#b91c1c}.box.y{border-color:#eab308;background:#fefce8;color:#a16207}.box b{font-size:28px;display:block}
+.btn{width:100%;padding:14px;border-radius:14px;border:0;font-weight:800;cursor:pointer;margin:6px 0}.btn-p{background:#0e7490;color:#fff}.btn-l{background:#f1f5f9;color:#334155}
+.wrongCard{background:#fff;border-right:4px solid #ef4444;border-radius:14px;padding:12px;margin:10px 6px;color:#0f172a}
+</style>
+</head>
+<body>
+<div class="wrapper" id="app"></div>
+<script>
+const DATA = [
+  ["Typical subsystems of an electric Power System consist of.....", ["Generation", "Transmission", "Distribution", "Utilization (i.e. loads, or users) Subsystems.", "all of these"], 4, "Chapter1"],
+  ["The electricity is most often generated at a power station by electromechanical -----", ["Generators", "Transformers", "Motors", "all of these"], 0, "Chapter1"],
+  ["hydropower, wind, solar photovoltaic, and geothermal power are used in the electric energy production. This sentence is---", ["True", "False"], 0, "Chapter1"],
+  ["Voltage levels of various portions of a typical utility grid....", ["15kv", "220kv", "66kv", "11kv", "380v", "all of these"], 5, "Chapter1"],
+  ["Generation Voltage level of a typical utility grid....", ["15kv", "220kv", "66kv", "11kv", "380v", "all of these"], 0, "Chapter1"],
+  ["Transmission Voltage level of a typical utility grid....", ["15kv", "220kv", "66kv", "11kv", "380v", "all of these"], 1, "Chapter1"],
+  ["Distribution Voltage level of a typical utility grid....", ["15kv", "220kv", "66kv", "11kv", "380v", "C , D and E"], 5, "Chapter1"],
+  ["End user load Voltage level of a typical utility grid....", ["15kv", "220kv", "66kv", "11kv", "380v", "all of these"], 4, "Chapter1"],
+  ["are responsible for transporting electrical energy between two distant points", ["Lines", "Circuit Breakers", "Potential Transformers", "none of these"], 0, "Chapter1"],
+  ["used for distribution lines are characterized by their current capacity and rated voltage.", ["Cables", "conductors", "Circuit Breaker", "Potential Transformer", "A and B"], 4, "Chapter1"],
+  ["is an electric device that consists of two or more windings coupled by their electromagnetic fields", ["Lines", "Transformer", "Circuit Breaker", "none of these"], 1, "Chapter1"],
+  ["is a switching device designed to open and close a circuit by non-automatic means and to open the circuit automatically on a predetermined overcurrent", ["Lines", "Transformer", "Circuit Breaker", "Potential Transformer", "none of these"], 2, "Chapter1"],
+  ["are used to reduce the primary circuit voltage to a safe value (like 120 V), so it can be used as an input signal for monitoring and protection devices.", ["Lines", "Circuit Breakers", "Potential Transformers", "none of these"], 2, "Chapter1"],
+  ["transforms line current into values suitable for standard protective and monitoring devices, and isolates the relays from line voltages", ["Lines", "Circuit Breaker", "Potential Transformer", "none of these"], 3, "Chapter1"],
+  ["is an electronic, low-powered device used to activate a high-powered device.", ["Relay", "Recloser", "Fuse", "none of these"], 0, "Chapter1"],
+  ["In case of a permanent fault, locks open after a preset number of operations (usually three or four), isolating the faulted section", ["Relay", "Recloser", "Fuse", "none of these"], 1, "Chapter1"],
+    ["consists of a strip of wire that melts and clears an electric circuit when an overcurrent or short-circuit current passes through it.", ["Relay", "Recloser", "Fuse", "none of these"], 2, "Chapter1"],
+  ["senses current flow above a preset level, and when the source-side protective device opens to de-energize the circuit, the sectionalizer counts the overcurrent interruption.", ["Sectionalizer", "Switch", "Voltage regulator", "none of these"], 0, "Chapter1"],
+  ["is a switching device used to isolate a system element for repair or maintenance.", ["Sectionalizer", "Switch", "Voltage regulator", "none of these"], 1, "Chapter1"],
+  ["is transformer with a 1:1 nominal transformation ratio equipped with an on-load tap changer", ["Sectionalizer", "Switch", "Voltage regulator", "none of these"], 2, "Chapter1"],
+  ["is a local source of reactive power", ["Capacitor Bank", "SCADA", "Voltage regulator", "none of these"], 0, "Chapter1"],
+  ["(System Control and Data Acquisition) is a communication system that allows real-time monitoring of the distribution system", ["Capacitor Bank", "SCADA", "Voltage regulator", "none of these"], 1, "Chapter1"],
+  ["a power transformer may be have ..", ["primary windings", "secondary windings", "tertiary windings", "all of these"], 3, "Chapter1"],
+  ["the function of the distribution substation", ["Voltage transformation", "Switching and protection", "Voltage regulation", "Metering", "all of these"], 4, "Chapter1"],
+  ["The most frequently used voltages and wiring in the primary distribution are ----- in Egypt", ["11kV", "22kV", "all of them"], 2, "Primary Distribution"],
+  ["Primary distribution, in low load density areas, is a -----system. This is economical but yields low reliability", ["radial", "loop", "all of them"], 0, "Primary Distribution"],
+  ["A more economical and fairly reliable arrangement is the ---- connection, when the main feeder is supplied from two independent distribution substations", ["radial", "loop", "all of them"], 1, "Primary Distribution"],
+  ["The ------improves the power factor and reduces voltage drop at heavy loads.", ["dc motor", "dc generator", "capacitor bank", "all of them"], 2, "Primary Distribution"],
+  ["the advantage of using radial designs for power distribution:", ["Protection is basically overcurrent", "Lower fault currents", "Voltage regulation and power flow control are easier", "System design is less expensive", "all of them"], 4, "Primary Distribution"],
+  ["-----reduce the installation costs but reduce aesthetics", ["cables", "Overhead lines", "all of them"], 1, "Primary Distribution"],
+  ["-------distribution system provides electric energy to the customers through the distribution transformers and secondary cables.", ["Primary", "Secondary", "all of them"], 1, "Secondary"],
+  ["The modern, mostly electronic meters can measure 15-min kW demand and the kWh energy consumption", ["True", "False"], 0, "Secondary"],
+  ["The ground wire connects the metal parts of the appliances and service panel box together to protect against ground-fault-produced electric shocks.", ["True", "False"], 0, "Secondary"],
+  ["The voltage supplied to each customer on a distribution feeder should be within the ----- limit.", ["±1%", "± 5%", "± 10%"], 1, "Secondary"],
+  ["The capacitor is switched off during the night when the load is light and switched on when the load is heavy", ["True", "False"], 0, "Secondary"],
+  ["In residential areas, the load is uniformly distributed. In this case the optimum location of the capacitor bank is around -----of the length of the feeder.", ["half", "one-third", "two-thirds"], 2, "Secondary"],
+  ["The voltage regulator is a tap-changing transformer which is located, in most cases, at the supply ----of the feeder.", ["half", "start", "end"], 2, "Secondary"],
+  ["The tap changer ----the supply voltage, which in turn increases the voltage above the allowable minimum at the last load.", ["increases", "decreases", "fixes"], 0, "Secondary"],
+  ["The tap changer transformer has two windings. ------winding is connected in parallel. -----winding is connected in series with the feeder.", ["The regulating- The excitation", "The excitation- The regulating"], 1, "Secondary"],
+  ["Keeping in mind that the maximum voltage drop to supply the sensitive load is 1.5% of the 220V. Therefore, the maximum voltage drop equals to ---- i.e. the minimum voltage to supply the sensitive load equals to ----.", ["3.3V , 216.7 V", "216.7 V, 3.3V", "6.6 V, 213.4 V", "213.4 V, 6.6 V"], 0, "Secondary"],
+  ["For the regular load the allowable voltage drop equals to 3% of the 220V i.e.-----, and the load should not be supplied with less than-----.", ["3.3V , 216.7 V", "216.7 V, 3.3V", "6.6 V, 213.4 V", "213.4 V, 6.6 V"], 2, "Secondary"],
+  ["-------losses which result from the heating of the conductor and the cable (or wire) insulation", ["the active power", "the reactive power"], 0, "Power Loss"],
+  ["--- losses, which is the energy needed for creation and storage of the magnetic fields associated with the flow of current", ["the active power", "the reactive power"], 1, "Power Loss"],
+  ["Mathematically, ----- losses can be simplified to Ploss = I2R, where R is the conductor resistance", ["the active power", "the reactive power"], 0, "Power Loss"],
+  ["----- loss can be simplified as Qloss = I2X, where X is the reactance of the line.", ["the active power", "the reactive power"], 1, "Power Loss"],
+  ["The power lost in a cable depends on", ["the cable length", "cable size", "the current through the cable", "all of these"], 3, "Power Loss"],
+  ["In electrical engineering, the power factor of an AC electrical power system is defined as the ratio of", ["the real power (P) flowing to the load to the apparent power (s)", "the real power (P) flowing to the load to the reactive power (Q)", "the reactive power (Q)flowing to the load to the apparent power (s)"], 0, "Power Factor"],
+  ["A power factor of less than one means that the voltage and current waveforms are not in phase", ["True", "False"], 0, "Power Factor"],
+  ["power factor can be equal------", ["unity power factor", "lagging power factor", "leading power factor", "all of these"], 3, "Power Factor"],
+  ["------- signifies that the load is inductive, as the load will consume reactive power, and therefore the reactive component Q is positive", ["unity power factor", "lagging power factor", "leading power factor", "all of these"], 1, "Power Factor"],
+  ["------ signifies that the load is capacitive, as the load supplies reactive power, and therefore the reactive component Q is negative", ["unity power factor", "lagging power factor", "leading power factor", "all of these"], 2, "Power Factor"],
+  ["In an electric power system, a load with a low power factor draws more current than a load with a high-power factor for the same amount of useful power transferred.", ["True", "False"], 0, "Power Factor"],
+  ["The ------currents increase the energy lost in the distribution system, and require larger wires and other equipment.", ["higher", "lower"], 0, "Power Factor"] 
+    ["Because of the costs of larger equipment and wasted energy, electrical utilities will usually charge a higher cost to industrial or commercial customers where there is a ---power factor.", ["high", "low"], 1, "Power Factor"],
+  ["Resistive loads include ------", ["incandescent lights, baseboard heaters, and cooking ovens.", "fluorescent lights, AC induction motors, arc welders, and transformers.", "all of them"], 0, "Load Characteristics"],
+  ["Inductive loads include------", ["incandescent lights, baseboard heaters, and cooking ovens.", "fluorescent lights, AC induction motors, arc welders, and transformers.", "all of them"], 1, "Load Characteristics"],
+  ["Calculate the impedance of the coil R=35Ω L=180mH V=100V f=50Hz", ["66.5 ohm", "6.65 ohm", "665 ohm"], 0, "Load Characteristics"],
+  ["Calculate the current of the coil", ["15 A", "1.5 A", "0.15 A"], 1, "Load Characteristics"],
+  ["Calculate the power factor of the coil", ["526", "5.26", "0.526"], 2, "Load Characteristics"],
+  ["Calculate the type of power factor of the coil", ["lagging", "leading", "unity"], 0, "Load Characteristics"],
+  ["Calculate the apparent power consumed of the coil", ["150 VA", "15 VA", "1.5 VA"], 0, "Load Characteristics"],
+  ["Advantages of improving the power factor:", ["Reduction in circuits current.", "Increase in voltage level at load buses.", "Reduction in system energy losses.", "Reduction in investments in the system facilities per kW of the load supplied.", "all of them"], 4, "Power Factor"],
+  ["The demand of an installation or system is the load that is drawn from the supply at a specified interval of time; it is expressed in KWs, KVA or Amperes.", ["True", "False"], 0, "Load Characteristics"],
+  ["The connected load is the sum of continuous ratings of all the equipments connected in supply system.", ["True", "False"], 0, "Load Characteristics"],
+  ["load curve which is a graphic record showing the demand of the power for every instant during the hour, the day, the month or the year", ["True", "False"], 0, "Load Characteristics"],
+  ["The maximum load (or the peak load) represents the maximum power that consumed by the load during a specific given time.", ["True", "False"], 0, "Load Characteristics"],
+  ["The average load is the average power that consumed by the load during a certain period of time", ["True", "False"], 0, "Load Characteristics"],
+  ["The load factor is the ratio of the average load to the maximum load for a certain period of time.", ["True", "False"], 0, "Load Characteristics"],
+  ["The demand factor is the ratio of the maximum load to the connected load.", ["True", "False"], 0, "Load Characteristics"],
+  ["if a residence having 6000W equipment connected has a maximum demand of 3300W, then the demand factor", ["0.55", "5.5", "55"], 0, "Load Characteristics"],
+  ["The diversity factor is the ratio of the sum of individual maximum demand of a group of loads to their overall maximum demand as seen by the power source", ["True", "False"], 0, "Load Characteristics"],
+  ["A distribution feeder serves 5 houses, each of which has a peak demand of 5 KW. The feeder peak turns out to be 20 kW. The diversity is", ["0.125", "1.25", "12.5"], 1, "Load Characteristics"],
+  ["A substation has three outgoing feeders: Feeder 1 has maximum demand 10 MW at 10:00 am, Feeder 2 has maximum demand 12 MW at 7:00 pm and Feeder 3 has maximum demand 15 MW at 9:00 pm, While the maximum demand of all three feeders is 33 MW at 8:00 pm. The diversity factor is", ["11.2", "0.112", "1.12"], 2, "Load Characteristics"],
+  ["A motor may only be used for eight hours a day, 50 weeks a year. The hours of operation would then be 2000 hours, and the motor Utilization factor for a base of 8760 hours per year would be", ["0.2283", "2.283", "0.02283"], 0, "Load Characteristics"],
+  ["The base load on a distribution substation is unvarying load which occurs almost the whole day on the substation.", ["True", "False"], 0, "Load Characteristics"],
+  ["The peak load on distribution substation is the various peak demand of the load over and above base load of the station", ["True", "False"], 0, "Load Characteristics"],
+  ["demand for feeder 250 kVA 90%", ["250 kVA x 90% = 225 kVA", "200 kVA x 80% = 160 kVA", "150 kVA x 75% = 112.5 kVA", "400 kVA x 85% = 340 kVA"], 0, "Load Characteristics"],
+  ["demand for feeder 200 kVA 80%", ["250 kVA x 90% = 225 kVA", "200 kVA x 80% = 160 kVA", "150 kVA x 75% = 112.5 kVA", "400 kVA x 85% = 340 kVA"], 1, "Load Characteristics"],
+  ["demand for feeder 150 kVA 75%", ["250 kVA x 90% = 225 kVA", "200 kVA x 80% = 160 kVA", "150 kVA x 75% = 112.5 kVA", "400 kVA x 85% = 340 kVA"], 2, "Load Characteristics"],
+  ["demand for feeder 400 kVA 85%", ["250 kVA x 90% = 225 kVA", "200 kVA x 80% = 160 kVA", "150 kVA x 75% = 112.5 kVA", "400 kVA x 85% = 340 kVA"], 3, "Load Characteristics"],
+  ["Hence, the sum of the individual demands =", ["837.5 kVA.", "83.75 kVA.", "8.375 kVA."], 0, "Load Characteristics"],
+  ["If the main feeder-circuit were sized at unity diversity: kVA = 837.5 kVA / 1.00 = 837.5 kVA. The main feeder-circuit would have to be supplied by an ---- - transformer.", ["85.0 kVA", "850 kVA", "8.50 kVA"], 1, "Load Characteristics"],
+  ["However, using the diversity factor of 1.5, the main feeder kVA = 837.5 kVA / 1.5 = 558 kVA for the main feeder. For diversity factor of 1.5, a ---- transformer could be used.", ["6 kVA", "60 kVA", "600 kVA"], 2, "Load Characteristics"],
+  ["Diversity factor = Sum of Individual Max. Demand / Max. Demand =", ["0.4", "4", "400"], 1, "Load Characteristics"],
+  ["Demand Factor = Maximum demand / Total connected load =", ["0.125", "1.25", "0.0125"], 0, "Load Characteristics"],
+  ["Generally, the reliability is the probability of a device or a system performing its function adequately", ["True", "False"], 0, "Reliability"],
+  ["Power system reliability can be described by basic functional attributes: adequacy and security", ["True", "False"], 0, "Reliability"],
+  ["The system adequacy is a measure of the ability of the power system to supply the aggregate electric power and energy requirements of the customers", ["True", "False"], 0, "Reliability"],
+  ["If a system is to have high availability, it should very rarely fail but it should also be possible to quickly repair it", ["True", "False"], 0, "Reliability"],
+  ["Mean Time Between Failure (MTBF) is a reliability term used to provide the number of failures per year for a product.", ["True", "False"], 0, "Reliability"],
+  ["Mean Time To Repair (MTTR) is the time needed to repair a failed hardware", ["True", "False"], 0, "Reliability"],
+  ["Mean Time Between Failure is a reliability term used to provide the number of failures per year for a product. Its symbol", ["MTBF", "MTTR", "none of them"], 0, "Reliability"],
+  ["Mean Time To Repair is the time needed to repair a failed hardware. Its symbol", ["MTBF", "MTTR", "none of them"], 1, "Reliability"],
+  ["when a piece of equipment is deenergized. called", ["Outage", "Momentary interruption", "Sustained interruption"], 0, "Power Quality"],
+  ["when a customer is deenergized for less than a few minutes. called", ["Outage", "Momentary interruption", "Sustained interruption"], 1, "Power Quality"],
+  ["Sustained interruption, when a customer is deenergized for more than a few minutes. called", ["Outage", "Momentary interruption", "Sustained interruption"], 2, "Power Quality"],
+  ["Sequence of Events after an Overhead Distribution Fault - fault causes high currents", ["The fault causes high currents to flow from the source to the fault location", "An instantaneous relay trips open the feeder circuit breaker at the substation", "If the fault persists, time overcurrent protection devices are allowed to clear the fault", "All of them"], 3, "Power Quality"],
+  ["the same fault will result in", ["voltage sags for some customers.", "momentary interruptions for other customers.", "varying lengths of sustained interruptions for other customers.", "All of them"], 3, "Power Quality"],
+  ["The most common customer reliability indices are:", ["System Average Interruption Frequency Index (SAIFI),", "System Average Interruption Duration Index (SAIDI),", "Customer Average Interruption Duration Index (CAIDI),", "Average System Availability Index (ASAI)", "All of them"], 4, "Reliability"],
+  ["If SAIFI and SAIDI are known,", ["CAIDI can be calculated.", "ASAI can be calculated.", "All of them"], 2, "Reliability"],
+  ["The System Average Interruption Duration Index (SAIDI) measures the average of the total long duration of interruptions affecting the average delivery point for a given year.", ["True", "False"], 0, "Reliability"],
+  ["This indicator is defined as the total time that customers were interrupted divided by the total number of customers.", ["System Average Interruption Frequency Index (SAIFI),", "System Average Interruption Duration Index (SAIDI),", "Customer Average Interruption Duration Index (CAIDI),", "Average System Availability Index (ASAI)"], 1, "Reliability"],
+  ["Consider a utility system supplying a total of 50,000 customers. The outage records over a whole year are shown in Table 1. The SAIDI is then equals to", ["4.2816 min/year.", "0.42816 min/year.", "0.042816 min/year."], 1, "Reliability"],
+  ["In the previous example, SAIFI = -----sustained interruptions/customer.", ["2.028", "0.2028", "0.02028."], 2, "Reliability"],
+  ["In the previous example, CAIDI = -----min/sustained interruption", ["21.1124", "211.124", "2.11124."], 0, "Reliability"],
+  ["CAIDI equals---", ["SAIDI/SAIFI", "SAIFI/ SAIDI", "SAIDI* SAIFI"], 0, "Reliability"],
+    ["Depending on duration of voltage variations, short-duration voltage disturbances can be classified into", ["Voltage sag", "Voltage Swells", "Interruptions", "All of them"], 3, "Power Quality"],
+  ["which is a drop in voltage (between 10% and 90%) for few cycles (1 to 30).", ["Voltage sag", "Voltage Swells", "Interruptions", "All of them"], 0, "Power Quality"],
+  ["which is an increase in the voltage between 1.1 and 1.8 p.u at the power frequency for a short period of time (1 to 30 cycles).", ["Voltage sag", "Voltage Swells", "Interruptions", "All of them"], 1, "Power Quality"],
+  ["which are temporary and momentary interruptions that occur when the supply voltage decreases less than 10% of its nominal value up to a period of time not larger than 1 minute.", ["Voltage sag", "Voltage Swells", "Interruptions", "All of them"], 2, "Power Quality"],
+  ["Duration of long-duration voltage disturbances are generally larger than one minute. These PQ disturbances can be classified to", ["Undervoltage", "Overvoltage", "Sustained interruptions", "All of them"], 3, "Power Quality"],
+  ["--- is a drop in voltage below the standard voltage tolerance (-5%).", ["Undervoltage", "Overvoltage", "Sustained interruptions"], 0, "Power Quality"],
+  ["------ is an increase in voltage above the standard voltage tolerance(+5%).", ["Undervoltage", "Overvoltage", "Sustained interruptions"], 1, "Power Quality"],
+  ["------ which are interruptions that occur when the supply voltage decrease less than 10% of its nominal value for a period of time larger than 1 minute", ["Undervoltage", "Overvoltage", "Sustained interruptions"], 2, "Power Quality"],
+  ["------ is the general- purpose alternating-current (AC) electric power supply", ["Mains electricity", "normal power supply", "default power supply", "all of them"], 3, "Standby Power"],
+  ["------ is an independent source of electrical power that supports important electrical systems on loss of normal power supply", ["Emergency generator", "standby generator", "all of them"], 2, "Standby Power"],
+  ["Transfer switch is an electrical switch that switches a load between two sources", ["True", "False"], 0, "Standby Power"],
+  ["----is an electrical apparatus that provides emergency power to a load when the input power source or mains power fails.", ["Uninterruptible Power Supply", "Uninterruptible Power Source (UPS)", "Automatic Transfer Switch (ATS)", "A and B"], 3, "Standby Power"],
+  ["Brownout is an intentional or unintentional drop in voltage in an electrical power supply system.", ["True", "False"], 0, "Power Quality"],
+  ["The important characteristics of a reserve power supply are:", ["Power capacity and stored energy and Transfer time", "Maximum duration of generation and Efficiency", "Cost of installation and maintenance.", "all of them"], 3, "Standby Power"],
+  ["duplicated feeder from grid power capacity---Transfer time----cost---", ["infinite/very short/very high", "effectively infinite/ from long up to very short/ medium to high", "medium/very short/ low", "medium/very short/ medium to high"], 0, "Standby Power"],
+  ["Engine generating sets power capacity---Transfer time----cost---", ["infinite/very short/very high", "effectively infinite/ from long up to very short/ medium to high", "medium/very short/ low", "medium/very short/ medium to high"], 1, "Standby Power"],
+  ["Battery storage power capacity---Transfer time----cost---", ["infinite/very short/very high", "effectively infinite/ from long up to very short/ medium to high", "medium/very short/ low", "medium/very short/ medium to high"], 2, "Standby Power"],
+  ["Un-interruptible power supply (UPS) systems power capacity---Transfer time----cost---", ["infinite/very short/very high", "effectively infinite/ from long up to very short/ medium to high", "medium/very short/ low", "medium/very short/ medium to high"], 3, "Standby Power"],
+  ["Compressed air energy storage (CAES) power capacity---Transfer time----cost---", ["low to medium/very short/medium to high", "effectively infinite/ from long up to very short/ medium to high", "medium/very short/ low", "medium/very short/ medium to high"], 0, "Standby Power"],
+  ["cost of sealed lead-acid, Nicd, NiMH and Li ion batteries are ---", ["low/medium/high/very high", "very high/ high/ medium/ low", "None of them"], 0, "Batteries"],
+  ["Energy density (Wh/kg) of sealed lead-acid, Nicd, NiMH and Li ion batteries are ---", ["30/50/75/100", "100/75/50/30", "None of them"], 0, "Batteries"],
+  ["Voltage per cell(V) of sealed lead-acid, Nicd, NiMH and Li ion batteries are ---", ["2.27/1.25/1.25/3.6", "3.6/1.25/1.25/2.27", "None of them"], 0, "Batteries"],
+  ["load current of sealed lead-acid, Nicd, NiMH and Li ion batteries are ---", ["low/very high/moderate/high", "high/moderate/very high/low", "None of them"], 0, "Batteries"],
+  ["No of charge/discharge cycles of sealed lead-acid, Nicd, NiMH and Li ion batteries are ---", ["200-2000/1500/500/300-500", "300-500/500/1500/200-2000", "None of them"], 0, "Batteries"],
+  ["self discharge of sealed lead-acid, Nicd, NiMH and Li ion batteries are ---", ["low/moderate/high/low", "low/high/moderate/low", "None of them"], 0, "Batteries"],
+  ["Min recharge time (hours) of sealed lead-acid, Nicd, NiMH and Li ion batteries are ---", ["8-16/1.5/2-3/3-6", "3-6/2-3/1.5/8-16", "None of them"], 0, "Batteries"],
+  ["environmental hazard of sealed lead-acid, Nicd, NiMH and Li ion batteries are ---", ["high/high/low/high", "low/low/high/low", "None of them"], 0, "Batteries"],
+  ["which one is not energy storage system", ["Flywheels", "Super-capacitors", "Superconducting magnetic energy storage (SMES)", "resistive load"], 3, "Batteries"],
+  ["for superconducting magnetic energy storage (SMES), the specific losses Wh -----and self discharge time----", ["35W/1.7min", "1.7W/35min", "none of them"], 0, "Batteries"],
+  ["for low speed flywheels (LSFW), the specific losses Wh -----and self discharge time----", ["2.2W/30min", "30W/2.2min", "none of them"], 0, "Batteries"],
+  ["for High speed flywheels (LSFW), the specific losses Wh -----and self discharge time----", ["1.2W/50min", "50W/1.2min", "none of them"], 0, "Batteries"],
+  ["for Super-capacitor(SC), the specific losses Wh -----and self discharge time----", ["0.026W/1.6days", "1.6W/0.026days", "none of them"], 0, "Batteries"],
+  ["for secondary batteries (SB), the specific losses Wh -----and self discharge time----", ["0.023W/very long, over a few months", "very high/0.023days", "none of them"], 0, "Batteries"],
+];
+  <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lect8 Electrical - Full 139Q - Premium Final Result</title>
+<style>
+*{box-sizing:border-box;font-family:system-ui}
+body{margin:0;min-height:100vh;background:radial-gradient(1200px 600px at 50% -10%,#12344e 0%,#0a1f33 55%,#07182a 100%);color:#fff;padding:12px}
+.wrapper{max-width:560px;margin:0 auto}
+.card-main{background:linear-gradient(180deg,#12304f,#0d2038);border-radius:28px;padding:26px 18px;border:1px solid #1e3a5f;text-align:center}
+.laptop{font-size:60px}
+h1{font-size:22px}
+.sub{color:#22d3ee;font-size:11px}
+.dev{color:#5a7a9a;font-size:10px;letter-spacing:2px;margin:14px 0 2px}
+.dev-name{color:#22d3ee;font-weight:800}
+.filt{display:inline-flex;padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);margin:4px 3px;font-size:11px;cursor:pointer}
+.filt.active{background:rgba(34,211,238,.18);border-color:#22d3ee;color:#fff}
+.count{color:#64748b;margin:12px 0;font-size:13px}.count b{color:#22d3ee}
+.start-btn{width:100%;padding:15px;border:0;border-radius:16px;background:linear-gradient(90deg,#0e8fa8,#14b8d6);color:#fff;font-weight:800;font-size:17px;cursor:pointer}
+.topbar{position:sticky;top:0;z-index:9;background:#0a1f33;padding:10px 8px;display:flex;gap:6px;overflow:auto}
+.badge{padding:6px 10px;border-radius:999px;font-size:11px;border:1px solid rgba(255,255,255,.15);background:#1e293b}
+.badge.ok{background:#0f3a2e;color:#86efac;border-color:#22c55e}
+.badge.bad{background:#3a1a1a;color:#fca5a5;border-color:#ef4444}
+.badge.per{background:#3a2e0f;color:#fde68a;border-color:#eab308}
+.progress{height:8px;background:rgba(255,255,255,.12);border-radius:999px;margin:8px;overflow:hidden}
+.progress div{height:100%;background:linear-gradient(90deg,#22d3ee,#0ea5e9);width:0%}
+.qcard{background:#fff;border-radius:20px;padding:14px;margin:12px 6px;color:#0f172a}
+.qhead{display:flex;gap:8px;align-items:center}
+.qnum{background:#0e7490;color:#fff;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:13px}
+.qtag{background:#0e7490;color:#fff;padding:4px 10px;border-radius:999px;font-size:11px}
+.qtitle{font-weight:800;font-size:14px;margin:10px 0;text-align:left;direction:ltr}
+.opt{border:1.5px solid #e2e8f0;border-radius:12px;padding:11px 12px;display:flex;gap:10px;margin:7px 0;cursor:pointer;background:#fff;text-align:left;direction:ltr}
+.opt .L{width:30px;height:30px;border-radius:50%;background:#f1f5f9;border:1px solid #cbd5e1;display:grid;place-items:center;font-weight:700}
+.opt.correct{border-color:#22c55e;background:#f0fdf4}.opt.correct .L{background:#22c55e;color:#fff}
+.opt.wrong{border-color:#ef4444;background:#fef2f2}.opt.wrong .L{background:#ef4444;color:#fff}
+.explain{margin-top:10px;background:#ecfdf5;border-right:4px solid #22c55e;border-radius:10px;padding:9px 11px;color:#065f46;font-size:12px;text-align:right;direction:rtl}
+.resultCard{background:#fff;border-radius:26px;padding:20px;text-align:center;color:#0f172a;margin:10px 6px}
+.circle{width:160px;height:160px;border-radius:50%;margin:12px auto;background:conic-gradient(#06b6d4 var(--p),#e2e8f0 0);display:grid;place-items:center}
+.circle>div{width:128px;height:128px;background:#fff;border-radius:50%;display:grid;place-items:center}
+.boxes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:14px 0}.box{border-radius:16px;padding:14px 8px;border:2px solid}
+.box.g{border-color:#22c55e;background:#f0fdf4;color:#15803d}.box.r{border-color:#ef4444;background:#fef2f2;color:#b91c1c}.box.y{border-color:#eab308;background:#fefce8;color:#a16207}.box b{font-size:28px;display:block}
+.btn{width:100%;padding:14px;border-radius:14px;border:0;font-weight:800;cursor:pointer;margin:6px 0}.btn-p{background:#0e7490;color:#fff}.btn-l{background:#f1f5f9;color:#334155}
+.wrongCard{background:#fff;border-right:4px solid #ef4444;border-radius:14px;padding:12px;margin:10px 6px;color:#0f172a}
+</style>
+</head>
+<body>
+<div class="wrapper" id="app"></div>
+<script>
+const DATA = [
+  ["Typical subsystems of an electric Power System consist of.....", ["Generation", "Transmission", "Distribution", "Utilization (i.e. loads, or users) Subsystems.", "all of these"], 4, "Chapter1"],
+  ["The electricity is most often generated at a power station by electromechanical -----", ["Generators", "Transformers", "Motors", "all of these"], 0, "Chapter1"],
+  ["hydropower, wind, solar photovoltaic, and geothermal power are used in the electric energy production. This sentence is---", ["True", "False"], 0, "Chapter1"],
+  ["Voltage levels of various portions of a typical utility grid....", ["15kv", "220kv", "66kv", "11kv", "380v", "all of these"], 5, "Chapter1"],
+  ["Generation Voltage level of a typical utility grid....", ["15kv", "220kv", "66kv", "11kv", "380v", "all of these"], 0, "Chapter1"],
+  ["Transmission Voltage level of a typical utility grid....", ["15kv", "220kv", "66kv", "11kv", "380v", "all of these"], 1, "Chapter1"],
+  ["Distribution Voltage level of a typical utility grid....", ["15kv", "220kv", "66kv", "11kv", "380v", "C , D and E"], 5, "Chapter1"],
+  ["End user load Voltage level of a typical utility grid....", ["15kv", "220kv", "66kv", "11kv", "380v", "all of these"], 4, "Chapter1"],
+  ["are responsible for transporting electrical energy between two distant points", ["Lines", "Circuit Breakers", "Potential Transformers", "none of these"], 0, "Chapter1"],
+  ["used for distribution lines are characterized by their current capacity and rated voltage.", ["Cables", "conductors", "Circuit Breaker", "Potential Transformer", "A and B"], 4, "Chapter1"],
+  ["is an electric device that consists of two or more windings coupled by their electromagnetic fields", ["Lines", "Transformer", "Circuit Breaker", "none of these"], 1, "Chapter1"],
+  ["is a switching device designed to open and close a circuit by non-automatic means and to open the circuit automatically on a predetermined overcurrent", ["Lines", "Transformer", "Circuit Breaker", "Potential Transformer", "none of these"], 2, "Chapter1"],
+  ["are used to reduce the primary circuit voltage to a safe value (like 120 V), so it can be used as an input signal for monitoring and protection devices.", ["Lines", "Circuit Breakers", "Potential Transformers", "none of these"], 2, "Chapter1"],
+  ["transforms line current into values suitable for standard protective and monitoring devices, and isolates the relays from line voltages", ["Lines", "Circuit Breaker", "Potential Transformer", "none of these"], 3, "Chapter1"],
+  ["is an electronic, low-powered device used to activate a high-powered device.", ["Relay", "Recloser", "Fuse", "none of these"], 0, "Chapter1"],
+  ["In case of a permanent fault, locks open after a preset number of operations (usually three or four), isolating the faulted section", ["Relay", "Recloser", "Fuse", "none of these"], 1, "Chapter1"],
