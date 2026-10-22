@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Electronic Bank - Premium</title>
+<style>
+*{box-sizing:border-box;font-family:system-ui}
+body{margin:0;min-height:100vh;background:radial-gradient(1200px 600px at 50% -10%,#12344e 0%,#0a1f33 55%,#07182a 100%);color:#fff;padding:12px}
+.wrapper{max-width:540px;margin:0 auto}
+.card-main{background:linear-gradient(180deg,#12304f,#0d2038);border-radius:28px;padding:26px 18px;border:1px solid #1e3a5f;text-align:center}
+.laptop{font-size:60px}
+h1{font-size:24px}
+.sub{color:#22d3ee;font-size:12px}
+.dev{color:#5a7a9a;font-size:10px;letter-spacing:2px;margin:14px 0 2px}
+.dev-name{color:#22d3ee;font-weight:800}
+.filt{display:inline-flex;padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);margin:4px 3px;font-size:12px;cursor:pointer}
+.filt.active{background:rgba(34,211,238,.18);border-color:#22d3ee;color:#fff}
+.count{color:#64748b;margin:12px 0;font-size:13px}.count b{color:#22d3ee}
+.start-btn{width:100%;padding:15px;border:0;border-radius:16px;background:linear-gradient(90deg,#0e8fa8,#14b8d6);color:#fff;font-weight:800;font-size:17px;cursor:pointer}
+.topbar{position:sticky;top:0;z-index:9;background:#0a1f33;padding:10px 8px;display:flex;gap:6px;overflow:auto}
+.badge{padding:6px 10px;border-radius:999px;font-size:11px;border:1px solid rgba(255,255,255,.15);background:#1e293b}
+.badge.ok{background:#0f3a2e;color:#86efac;border-color:#22c55e}
+.badge.bad{background:#3a1a1a;color:#fca5a5;border-color:#ef4444}
+.badge.per{background:#3a2e0f;color:#fde68a;border-color:#eab308}
+.progress{height:8px;background:rgba(255,255,255,.12);border-radius:999px;margin:8px;overflow:hidden}
+.progress div{height:100%;background:linear-gradient(90deg,#22d3ee,#0ea5e9);width:0%}
+.qcard{background:#fff;border-radius:20px;padding:14px;margin:12px 6px;color:#0f172a}
+.qhead{display:flex;gap:8px;align-items:center}
+.qnum{background:#0e7490;color:#fff;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:13px}
+.qtag{background:#0e7490;color:#fff;padding:4px 10px;border-radius:999px;font-size:11px}
+.qtitle{font-weight:800;font-size:15px;margin:10px 0;text-align:left;direction:ltr}
+.opt{border:1.5px solid #e2e8f0;border-radius:12px;padding:11px 12px;display:flex;gap:10px;margin:7px 0;cursor:pointer;background:#fff;text-align:left;direction:ltr}
+.opt .L{width:30px;height:30px;border-radius:50%;background:#f1f5f9;border:1px solid #cbd5e1;display:grid;place-items:center;font-weight:700}
+.opt.correct{border-color:#22c55e;background:#f0fdf4}.opt.correct .L{background:#22c55e;color:#fff}
+.opt.wrong{border-color:#ef4444;background:#fef2f2}.opt.wrong .L{background:#ef4444;color:#fff}
+.explain{margin-top:10px;background:#ecfdf5;border-right:4px solid #22c55e;border-radius:10px;padding:9px 11px;color:#065f46;font-size:12px;text-align:right;direction:rtl}
+.resultCard{background:#fff;border-radius:26px;padding:20px;text-align:center;color:#0f172a;margin:10px 6px}
+.circle{width:160px;height:160px;border-radius:50%;margin:12px auto;background:conic-gradient(#06b6d4 var(--p),#e2e8f0 0);display:grid;place-items:center}
+.circle>div{width:128px;height:128px;background:#fff;border-radius:50%;display:grid;place-items:center}
+.boxes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:14px 0}.box{border-radius:16px;padding:14px 8px;border:2px solid}
+.box.g{border-color:#22c55e;background:#f0fdf4;color:#15803d}.box.r{border-color:#ef4444;background:#fef2f2;color:#b91c1c}.box.y{border-color:#eab308;background:#fefce8;color:#a16207}.box b{font-size:28px;display:block}
+.btn{width:100%;padding:14px;border-radius:14px;border:0;font-weight:800;cursor:pointer;margin:6px 0}.btn-p{background:#0e7490;color:#fff}.btn-l{background:#f1f5f9;color:#334155}
+.wrongCard{background:#fff;border-right:4px solid #ef4444;border-radius:14px;padding:12px;margin:10px 6px;color:#0f172a}
+</style>
+</head>
+<body>
+<div class="wrapper" id="app"></div>
+<script>
+const DATA = [
+  ["The ability of a charge to do work is its ........", ["potential", "current", "electromotive force", "Resistance"], 0, "Basic Electricity"],
+  ["When one charge is different from the other, there is a ........", ["difference", "potential", "current", "battery"], 0, "Basic Electricity"],
+  ["The unit of potential difference is the ........", ["Volt", "Ampere", "Resistance", "Meter"], 0, "Basic Electricity"],
+  ["The sum of potential differences of all charges is called ........", ["Magnetic effect", "Volt", "Resistance", "electromotive force"], 3, "Basic Electricity"],
+  ["The movement of charges produces ........", ["potential", "volt", "current", "resistance"], 2, "Basic Electricity"],
+  ["A greater amount of moving charges means a higher value for the current", ["same", "lower", "opposite", "higher"], 3, "Basic Electricity"],
+  ["When the potential difference is zero, the value of current is ........", ["zero", "infinity", "two", "-ve infinity"], 0, "Basic Electricity"],
+  ["The rate of flow of charge is called ........", ["current", "voltage", "magnetic field", "ampere"], 0, "Basic Electricity"],
+  ["The direction of the conventional flow of current is from a point of positive to ........", ["negative", "-ve infinity", "positive", "+ve infinity"], 0, "Basic Electricity"],
+  ["Electron flow is opposite in direction to ........ flow", ["negative", "-ve infinity", "positive", "conventional"], 3, "Basic Electricity"],
+  ["Direct current (dc) has just ........ direction", ["alternating", "opposite", "same", "one"], 3, "Basic Electricity"],
+  ["A battery is an example of a dc voltage source", ["battery", "car", "machine", "motor"], 0, "Basic Electricity"],
+  ["An alternating current (ac) reverses its ........", ["generate", "reverse", "same", "polarity"], 1, "Basic Electricity"],
+  ["Which of the following describes the part of a waveform that does not repeat or duplicate itself?", ["peak", "frequency", "cycle", "RMS value"], 2, "Waveform"],
+  ["Board used for testing and experimenting and to try out an idea with no soldering", ["Stripboard", "Breadboard", "RadioShack", "Ic spacing pc board"], 1, "Boards"],
+  ["Board is unlike breadboard, permanent soldered circuit and requires no special preparation other than cutting to size needed", ["Stripboard", "Breadboard", "RadioShack", "Ic spacing pc board"], 0, "Boards"],
+  ["Board is not recommended if you are beginner", ["Stripboard", "Breadboard", "RadioShack", "PCB"], 3, "Boards"],
+  ["Software used to draw a circuit and design your pc board", ["ASL", "Photoshop", "Revit", "CAD"], 3, "Software"],
+  ["The third terminal in potentiometer is called ........", ["Wiper arm", "Rheostat", "tapper", "all the answers"], 0, "Potentiometer"],
+  ["The three terminals configuration of potentiometer is used to adjust ........", ["Current", "volt", "multimeter", "a&b"], 1, "Potentiometer"],
+  ["In potentiometer the greater resistance, the ........ current", ["greater-greater", "smaller-smaller", "greater-smaller", "smaller-greater"], 2, "Potentiometer"],
+  ["is a free online encyclopedia, created and edited by volunteers around the world and hosted by the Wikimedia Foundation.", ["Google", "Wikipedia", "Instagram", "Twitter"], 1, "Networking & Internet"]
+];
+
+let FILTER='الكل';
+let ORDER=[];
+let ANS=[];
+function getCats(){let m={};DATA.forEach(q=>{m[q[3]]=(m[q[3]]||0)+1});return m;}
+function home(){
+  let cats=getCats();
+  let total=DATA.length;
+  let html=`
+  <div class="card-main">
+    <div class="laptop">💻</div>
+    <h1>Electronic Bank</h1>
+    <div class="sub">Basic Electricity · Boards · Potentiometer · Waveform · ${total} Questions</div>
+    <div class="dev">DESIGNED & DEVELOPED BY</div>
+    <div class="dev-name">ENG MOHAMED GALAL</div>
+    <div class="filters">
+      <p>اختر الموضوع</p>
+      <span class="filt ${FILTER=='الكل'?'active':''}" onclick="setF('الكل')">📚 الكل (${total})</span>
+      ${Object.keys(cats).map(k=>`<span class="filt ${FILTER==k?'active':''}" onclick="setF('${k}')">${k} (${cats[k]})</span>`).join("")}
+    </div>
+    <div class="count">عدد الأسئلة: <b>${FILTER=='الكل'?total:cats[FILTER]||0}</b> سؤال</div>
+    <button class="start-btn" onclick="startQuiz()">ابدأ الاختبار ▶</button>
+    <div class="dev" style="margin-top:16px">DESIGNED & DEVELOPED BY</div>
+    <div class="dev-name">ENG MOHAMED GALAL</div>
+  </div>`;
+  document.getElementById("app").innerHTML=html;
+}
+function setF(f){FILTER=f;home();}
+function startQuiz(){
+  ORDER=FILTER=='الكل'?DATA.map((_,i)=>i):DATA.map((q,i)=>q[3]==FILTER?i:null).filter(v=>v!=null);
+  ANS=new Array(DATA.length).fill(null);
+  renderQuiz();
+}
+function renderQuiz(){
+  let actualDone=ORDER.filter(i=>ANS[i]!=null).length;
+  let cor=ORDER.filter(i=>ANS[i]==DATA[i][2]).length;
+  let wr=actualDone-cor;
+  let per=ORDER.length?Math.round(actualDone/ORDER.length*100):0;
+  let h=`
+  <div class="topbar">
+    <span class="badge">أجبت ${actualDone}/${ORDER.length}</span>
+    <span class="badge ok">✅ ${cor}</span>
+    <span class="badge bad">❌ ${wr}</span>
+    <span class="badge per">📊 ${per}%</span>
+  </div>
+  <div class="progress"><div style="width:${per}%"></div></div>`;
+  ORDER.forEach((idx,pos)=>{
+    let q=DATA[idx];
+    let ua=ANS[idx];
+    h+=`<div class="qcard"><div class="qhead"><div class="qnum">Q${pos+1}</div><div class="qtag">${q[3]}</div></div><div class="qtitle">${q[0]}</div>`;
+    q[1].forEach((op,j)=>{
+      let cls='opt';
+      if(ua!=null){if(j==q[2]) cls+=' correct'; else if(j==ua) cls+=' wrong';}
+      h+=`<div class="${cls}" onclick="answer(${idx},${j})"><div class="L">${String.fromCharCode(65+j)}</div><div>${op}</div></div>`;
+    });
+    if(ua!=null){
+      h+=`<div class="explain">${ua==q[2]?'✅ صح!':'❌ الصحيح'}: <b>${q[1][q[2]]}</b>${q[0].includes('Wikipedia')?'<br>Wikipedia هي الموسوعة الحرة المجانية على الإنترنت، يكتبها ويراجعها ملايين المتطوعين حول العالم وتستضيفها مؤسسة Wikimedia Foundation.':''}</div>`;
+    }
+    h+=`</div>`;
+  });
+  h+=`<button class="btn btn-p" style="margin:12px 6px" onclick="showResult()">🎯 عرض النتيجة</button>`;
+  document.getElementById("app").innerHTML=h;
+  window.scrollTo(0,0);
+}
+function answer(qIdx,optIdx){if(ANS[qIdx]!=null) return;ANS[qIdx]=optIdx;renderQuiz();}
+function showResult(){
+  let total=ORDER.length;
+  let cor=ORDER.filter(i=>ANS[i]==DATA[i][2]).length;
+  let wr=total-cor;
+  let per=total?Math.round(cor/total*100):0;
+  let msg=per<50?'📚 تحتاج مراجعة أكثر، إنت قادر!':per<80?'👍 أداء جيد، استمر!':'🏆 ممتاز يا هندسة!';
+  let h=`
+  <div class="resultCard">
+    <div style="font-size:28px">🎉 انتهى الاختبار!</div>
+    <div class="circle" style="--p:${per}%"><div><div><b style="font-size:48px">${cor}</b><div style="color:#64748b">من ${total}</div></div></div></div>
+    <div style="margin:10px 0;color:#475569">${msg}</div>
+    <div class="boxes">
+      <div class="box g"><b>${cor}</b><span>✅ صح</span></div>
+      <div class="box r"><b>${wr}</b><span>❌ غلط</span></div>
+      <div class="box y"><b>${per}%</b><span>📊 النسبة</span></div>
+    </div>
+    <button class="btn btn-p" onclick="renderQuiz()">🔄 إعادة الاختبار</button>
+    <button class="btn btn-l" onclick="home()">🏠 الرئيسية</button>
+  </div>
+  <div style="margin:14px 6px;color:#94a3b8;font-size:13px">مراجعة الإجابات الغلط</div>`;
+  ORDER.forEach((idx,pos)=>{
+    if(ANS[idx]==DATA[idx][2]) return;
+    let q=DATA[idx];
+    h+=`<div class="wrongCard"><div style="font-weight:800">❌ Q${pos+1}: ${q[0]}</div><div style="margin-top:6px">✅ الصح: <b style="color:#15803d">${q[1][q[2]]}</b></div><div style="color:#b91c1c">✖️ إجابتك: ${ANS[idx]!=null?q[1][ANS[idx]]:'لم تجب'}</div></div>`;
+  });
+  document.getElementById("app").innerHTML=h;
+}
+home();
+</script>
+</body>
+  </html>
